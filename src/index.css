@@ -1,0 +1,35 @@
+/* src/index.css */
+
+/* ── Fonts ──────────────────────────────────────────────────────────────────── */
+/* JetBrains Mono via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/*
+  Geist: self-host from https://vercel.com/font  OR  npm install geist
+  If using the npm package, import in main.tsx instead:
+    import 'geist/dist/fonts/geist-sans/style.css'
+*/
+
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: #FBFBF8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar hiding (supplement to inline scrollbarWidth: none) ───────────── */
+.snap-hide-bar::-webkit-scrollbar,
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
