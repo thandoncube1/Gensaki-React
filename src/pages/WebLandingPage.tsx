@@ -5,6 +5,7 @@
 import React, {
   useState, useEffect, useRef, useCallback,
 } from 'react';
+import { Wordmark, CTAButton, HeroEyebrow, HeaderNav } from '../components/HeaderNav';
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // Mirrors the fileprivate Swift tokens exactly.
@@ -66,7 +67,7 @@ interface MarqueeProps {
   children: React.ReactNode;
 }
 
-function Marquee({ speed = 36, spacing = 64, height = 36, children }: MarqueeProps) {
+export function Marquee({ speed = 36, spacing = 64, height = 36, children }: MarqueeProps) {
   const reduceMotion = useReduceMotion();
   const trackRef     = useRef<HTMLDivElement>(null);
   const unitRef      = useRef<HTMLDivElement>(null);
@@ -147,125 +148,6 @@ function DashedLine({ color = C.line }: { color?: string }) {
       width: '100%', height: 1,
       backgroundImage: `repeating-linear-gradient(90deg, ${color} 0, ${color} 3px, transparent 3px, transparent 7px)`,
     }} />
-  );
-}
-
-// ─── Wordmark ─────────────────────────────────────────────────────────────────
-
-function Wordmark({ markSize = 38, fontSize = 22, color = C.ink }: {
-  markSize?: number; fontSize?: number; color?: string;
-}) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-      {/* TODO: replace src with correct asset path once bundled */}
-      <img
-        src="/assets/bigblack.png"
-        alt="Gensaki mark"
-        style={{ width: markSize, height: markSize, objectFit: 'cover', marginLeft: 20 }}
-      />
-      <span style={{
-        fontFamily: ff('geist'), fontSize, fontWeight: 500,
-        letterSpacing: '-0.3px', color,
-      }}>
-        Gensaki
-      </span>
-    </div>
-  );
-}
-
-// ─── CTAButton ────────────────────────────────────────────────────────────────
-
-type CTAKind = 'ink' | 'cyan' | 'ghost';
-
-function CTAButton({ title, kind = 'ink', onClick }: {
-  title: string; kind?: CTAKind; onClick?: () => void;
-}) {
-  const [h, setH] = useState(false);
-
-  const fg  = kind === 'ink' ? '#fff' : kind === 'cyan' ? C.cyanInk : h ? C.ink : C.ink2;
-  const bg  = kind === 'ink' ? C.ink  : kind === 'cyan' ? C.cyan    : 'transparent';
-  const bdr = kind === 'ghost' ? `1px solid ${h ? C.line : 'transparent'}` : 'none';
-
-  return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setH(true)}
-      onMouseLeave={() => setH(false)}
-      style={{
-        display: 'inline-flex', alignItems: 'center', gap: 9,
-        fontFamily: ff('geist'), fontSize: 15, fontWeight: 500,
-        color: fg, background: bg, border: bdr,
-        borderRadius: 10, padding: kind === 'ghost' ? '13px 18px' : '13px 20px',
-        cursor: 'pointer', outline: 'none',
-        transform: h ? 'scale(1.012)' : 'scale(1)',
-        transition: 'all 0.15s ease-out',
-        boxShadow: h && kind !== 'ghost' ? 'inset 0 0 0 1000px rgba(255,255,255,0.10)' : 'none',
-      }}
-    >
-      {title}
-      <span style={{
-        transform: h ? 'translate(2px,-2px)' : 'translate(0,0)',
-        transition: 'transform 0.15s ease-out', opacity: 0.92,
-      }}>
-        ↗︎
-      </span>
-    </button>
-  );
-}
-
-// ─── NavLink ──────────────────────────────────────────────────────────────────
-
-function NavLink({ title, chevron = false, isActive = false, onClick }: {
-  title: string; chevron?: boolean; isActive?: boolean; onClick?: () => void;
-}) {
-  const [h, setH] = useState(false);
-  const active = isActive || h;
-
-  return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setH(true)}
-      onMouseLeave={() => setH(false)}
-      style={{
-        display: 'inline-flex', alignItems: 'center', gap: 6,
-        background: 'none', border: 'none', cursor: 'pointer',
-        fontFamily: ff('geist'), fontSize: 15, fontWeight: 400,
-        color: active ? C.ink : C.ink2,
-        padding: '8px 0', position: 'relative',
-        transition: 'color 0.12s ease-out',
-      }}
-    >
-      {title}
-      {chevron && <span style={{ fontSize: 9, opacity: 0.5, marginTop: 1 }}>▾</span>}
-      <span style={{
-        position: 'absolute', bottom: -5, left: 0, right: 0, height: 2,
-        background: C.ink,
-        transform: active ? 'scaleX(1)' : 'scaleX(0)',
-        opacity: isActive ? 1 : h ? 0.5 : 0,
-        transition: 'transform 0.12s ease-out, opacity 0.12s ease-out',
-        transformOrigin: 'center',
-      }} />
-    </button>
-  );
-}
-
-// ─── HeroEyebrow ─────────────────────────────────────────────────────────────
-
-function HeroEyebrow({ text }: { text: string }) {
-  return (
-    <div style={{
-      display: 'inline-flex', alignItems: 'center', gap: 10,
-      padding: '6px 12px',
-      background: 'rgba(255,255,255,0.6)',
-      border: `1px solid ${C.line}`,
-      borderRadius: 999,
-    }}>
-      <span style={{ position: 'relative', width: 14, height: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-        <span style={{ width: 14, height: 14, borderRadius: '50%', background: `${C.green}2E`, position: 'absolute' }} />
-        <span style={{ width: 6,  height: 6,  borderRadius: '50%', background: C.green, position: 'relative', zIndex: 1 }} />
-      </span>
-      <span style={{ fontFamily: ff('mono'), fontSize: 12, color: C.mute }}>{text}</span>
-    </div>
   );
 }
 
@@ -483,7 +365,7 @@ function HeroConnectors() {
 const LEFT_PILLS:  Array<[string, string, boolean]> = [['HELOC','$2.4B',true],['AUTO','$1.1B',false],['CRE','$3.8B',false]];
 const RIGHT_PILLS: Array<[string, string, boolean]> = [['PRIVATE CREDIT','8 desks',true],['REINSURANCE','12 desks',false],['HEDGE FUND','5 desks',false]];
 
-function HeroDiagram({ isCompact }: { isCompact: boolean }) {
+export function HeroDiagram({ isCompact }: { isCompact: boolean }) {
   if (isCompact) {
     return (
       <div style={{ borderTop: `1px solid ${C.line}`, borderBottom: `1px solid ${C.line}`, padding: '32px 0' }}>
@@ -532,51 +414,9 @@ function HeroDiagram({ isCompact }: { isCompact: boolean }) {
   );
 }
 
-// ─── GensakiNav ───────────────────────────────────────────────────────────────
-
-function GensakiNav({ isCompact, selectedItem, onSelectItem }: {
-  isCompact: boolean;
-  selectedItem: string | null;
-  onSelectItem: (v: string | null) => void;
-}) {
-  const hPad = isCompact ? 20 : 40;
-  return (
-    <Centered hPad={hPad}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 48, padding: '26px 0' }}>
-        <Wordmark markSize={46} fontSize={24} />
-        {!isCompact ? (
-          <>
-            <div style={{ flex: 1 }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
-              {(['Benchmark', 'FitScore', 'Diligence', 'RegWatch'] as const).map(name => (
-                <NavLink
-                  key={name} title={name}
-                  isActive={selectedItem === name}
-                  onClick={() => onSelectItem(name)}
-                />
-              ))}
-              <NavLink title="Sign in" onClick={() => onSelectItem('AuthViews')} />
-              <CTAButton title="Request Free Demo" kind="cyan" />
-            </div>
-          </>
-        ) : (
-          <>
-            <div style={{ flex: 1 }} />
-            <CTAButton title="Demo" kind="cyan" />
-          </>
-        )}
-      </div>
-    </Centered>
-  );
-}
-
 // ─── TopWashSection ───────────────────────────────────────────────────────────
 
-function TopWashSection({ isCompact, selectedItem, onSelectItem }: {
-  isCompact: boolean;
-  selectedItem: string | null;
-  onSelectItem: (v: string | null) => void;
-}) {
+function TopWashSection({ isCompact }: { isCompact: boolean }) {
   const hPad = isCompact ? 20 : 40;
   return (
     <div style={{
@@ -657,7 +497,7 @@ function StatTile({ s }: { s: StatData }) {
   );
 }
 
-function StatsBandSection({ isCompact }: { isCompact: boolean }) {
+export function StatsBandSection({ isCompact }: { isCompact: boolean }) {
   return (
     <div style={{
       background: '#fff',
@@ -1365,42 +1205,6 @@ function BottomWashSection({ isCompact }: { isCompact: boolean }) {
 // Between 50–80 px the frosted-glass surface fades in; above 80 px it is fully
 // opaque. The nav content itself never disappears.
 
-function Header({ isCompact, selectedItem, onSelectItem, scrollContainerRef }: {
-  isCompact: boolean;
-  selectedItem: string | null;
-  onSelectItem: (v: string | null) => void;
-  scrollContainerRef: React.RefObject<HTMLDivElement>;
-}) {
-  const [progress, setProgress] = useState(0); // 0 = hero-blended, 1 = frosted
-
-  useEffect(() => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const y = el.scrollTop;
-      setProgress(Math.min(1, Math.max(0, (y - 50) / 30))); // ramp 50 → 80 px
-    };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
-  }, [scrollContainerRef]);
-
-  return (
-    <div style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      // Nav is always visible; only the surface behind it transitions
-      opacity: 1,
-      pointerEvents: 'auto',
-      background: `rgba(251,251,248,${0.72 * progress})`,
-      backdropFilter: progress > 0 ? `blur(${18 * progress}px)` : 'none',
-      WebkitBackdropFilter: progress > 0 ? `blur(${18 * progress}px)` : 'none',
-      borderBottom: progress > 0.5 ? `1px solid rgba(230,232,226,${progress})` : 'none',
-      transition: 'background 0.25s ease-out',
-    }}>
-      <GensakiNav isCompact={isCompact} selectedItem={selectedItem} onSelectItem={onSelectItem} />
-    </div>
-  );
-}
-
 // ─── SectionIndicator ─────────────────────────────────────────────────────────
 
 function SectionIndicator({ count, active, onSelect }: {
@@ -1482,7 +1286,7 @@ export default function WebLandingPage({ selectedItem, onSelectItem }: WebLandin
   }, []);
 
   const sections = [
-    <TopWashSection   isCompact={isCompact} selectedItem={selectedItem} onSelectItem={onSelectItem} />,
+    <TopWashSection   isCompact={isCompact} />,
     <WhoForSection    isCompact={isCompact} />,
     <SolutionsSection isCompact={isCompact} />,
     <ProductsSection  isCompact={isCompact} />,
@@ -1521,11 +1325,11 @@ export default function WebLandingPage({ selectedItem, onSelectItem }: WebLandin
       </div>
 
       {/* Fixed header — transparent until 50 px scroll, fades in by 80 px */}
-      <Header
+      <HeaderNav
         isCompact={isCompact}
         selectedItem={selectedItem}
         onSelectItem={onSelectItem}
-        scrollContainerRef={scrollContainerRef}
+        scrollRef={scrollContainerRef}
       />
 
       {/* Fixed left-side section indicator */}
