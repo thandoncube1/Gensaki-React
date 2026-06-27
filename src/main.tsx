@@ -1,50 +1,80 @@
 // src/main.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import './index.css';
 import WebLandingPage from './pages/WebLandingPage';
-import AuthView, { type AuthMode } from './pages/AuthViews';
+import AuthView from './pages/AuthViews';
 import GISTIndexView from './pages/GISTIndex';
 
-function App() {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  const [authMode, setAuthMode] = useState<AuthMode>('signIn');
+// ─── Route → selectedItem mapping (for nav-link highlighting) ─────────────────
+const ROUTE_ITEM: Record<string, string> = {
+  '/benchmark': 'Benchmark',
+  '/fitscore':  'FitScore',
+  '/diligence': 'Diligence',
+  '/regwatch':  'RegWatch',
+};
 
-  if (selectedItem === 'GISTIndex' || selectedItem === 'Benchmark') {
-    return <GISTIndexView onSelectItem={(item) => {
-      if (item === 'Home' || item === null) setSelectedItem(null);
-      else if (item === 'AuthViews') { setAuthMode('signIn'); setSelectedItem('AuthViews'); }
-      else setSelectedItem(item);
-    }} />;
-  }
+// ─── Central navigation handler ───────────────────────────────────────────────
+// All pages call onSelectItem(key) — this function maps keys to routes.
+// New pages just need a new key → path entry here.
 
-  if (selectedItem === 'AuthViews') {
-    return (
-      <AuthView
-        initialMode={authMode}
-        onSelectItem={(item) => {
-          // 'Home' or null → back to landing
-          if (item === 'Home' || item === null) {
-            setSelectedItem(null);
-          } else {
-            setSelectedItem(item);
-          }
-        }}
-      />
-    );
+function AppRoutes() {
+  const navigate   = useNavigate();
+  const { pathname } = useLocation();
+
+  const selectedItem = ROUTE_ITEM[pathname] ?? null;
+
+  function onSelectItem(item: string | null) {
+    if (!item || item === 'Home')                         navigate('/');
+    else if (item === 'Benchmark' || item === 'GISTIndex') navigate('/benchmark');
+    else if (item === 'FitScore')                         navigate('/fitscore');
+    else if (item === 'Diligence')                        navigate('/diligence');
+    else if (item === 'RegWatch')                         navigate('/regwatch');
+    else if (item === 'AuthViews')                        navigate('/signin');
+    else if (item === 'SignUp')                           navigate('/signup');
   }
 
   return (
-    <WebLandingPage
-      selectedItem={selectedItem}
-      onSelectItem={(item) => {
-        // Nav "Sign in" sends 'AuthViews' → default to signIn mode
-        if (item === 'AuthViews') { setAuthMode('signIn'); setSelectedItem('AuthViews'); }
-        // Future: CTAButtons can send 'SignUp' to open sign-up directly
-        else if (item === 'SignUp') { setAuthMode('signUp'); setSelectedItem('AuthViews'); }
-        else setSelectedItem(item);
-      }}
-    />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <WebLandingPage
+            selectedItem={selectedItem}
+            onSelectItem={onSelectItem}
+          />
+        }
+      />
+      <Route
+        path="/benchmark"
+        element={<GISTIndexView onSelectItem={onSelectItem} />}
+      />
+      <Route
+        path="/signin"
+        element={<AuthView initialMode="signIn" onSelectItem={onSelectItem} />}
+      />
+      <Route
+        path="/signup"
+        element={<AuthView initialMode="signUp" onSelectItem={onSelectItem} />}
+      />
+    </Routes>
+  );
+}
+
+// ─── App root ─────────────────────────────────────────────────────────────────
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 

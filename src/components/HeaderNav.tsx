@@ -9,6 +9,7 @@
 //   HeaderNav      — fixed positioned wrapper with scroll-driven frosted-glass surface
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // ─── Palette & type helpers ───────────────────────────────────────────────────
 
@@ -39,7 +40,10 @@ export function Wordmark({
   asset?: 'bigblack' | 'bigwhite';
 }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+    <Link
+      to="/"
+      style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}
+    >
       <img
         src={`/assets/${asset}.png`}
         alt="Gensaki mark"
@@ -51,7 +55,7 @@ export function Wordmark({
       }}>
         Gensaki
       </span>
-    </div>
+    </Link>
   );
 }
 

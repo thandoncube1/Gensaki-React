@@ -2,7 +2,7 @@
 // Converted from GISTIndex.swift (Gensaki institutional SRT platform)
 
 import React, { useState, useRef, useEffect } from 'react';
-import { CTAButton, HeroEyebrow, GensakiNav, HeaderNav } from '../components/HeaderNav';
+import { CTAButton, HeroEyebrow, HeaderNav } from '../components/HeaderNav';
 
 // ─── Blotter palette ──────────────────────────────────────────────────────────
 const B = {
