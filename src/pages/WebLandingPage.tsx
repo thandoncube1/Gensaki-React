@@ -656,7 +656,7 @@ function ProductsSection({ isCompact }: { isCompact: boolean }) {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <div style={{ display: 'flex', gap: 1 }}>
-                <div style={{ flex: 1 }}><ProductCard item={PRODUCTS[0]} /></div>
+                <div style={{ flex: 1, display: 'flex' }}><ProductCard item={PRODUCTS[0]} /></div>
                 <div style={{ flex: 1, display: 'flex', gap: 1 }}>
                   <ProductCard item={PRODUCTS[1]} />
                   <ProductCard item={PRODUCTS[2]} />

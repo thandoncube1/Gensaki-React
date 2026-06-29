@@ -543,11 +543,11 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
 
   function MetricGrid({ rows }: { rows: [string, string, string][] }) {
     return (
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(150px,1fr))', gap:12 }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(160px,1fr))', gap:12 }}>
         {rows.map(([label, val, color]) => (
-          <div key={label} style={{ background:B.bg, borderRadius:8, border:`1px solid ${B.bd}`, padding:12 }}>
-            <div style={{ fontSize:9, fontWeight:600, color:B.s, textTransform:'uppercase', marginBottom:3 }}>{label}</div>
-            <div style={{ fontSize:17, fontWeight:700, fontFamily:ff('mono'), color }}>{val}</div>
+          <div key={label} style={{ background:B.bg, borderRadius:10, border:`1px solid ${B.bd}`, padding:14 }}>
+            <div style={{ fontSize:11, fontWeight:600, color:B.s, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:6, fontFamily:ff('geist') }}>{label}</div>
+            <div style={{ fontSize:20, fontWeight:700, fontFamily:ff('mono'), color }}>{val}</div>
           </div>
         ))}
       </div>
@@ -561,37 +561,37 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
   return (
     <div style={{ position:'fixed', inset:0, zIndex:200, background:B.bg, display:'flex', flexDirection:'column', overflow:'hidden' }}>
       {/* Banner */}
-      <div style={{ background:B.card, borderBottom:`1px solid ${B.bd}`, padding:'0 24px', flexShrink:0 }}>
-        <div style={{ display:'flex', alignItems:'center', gap:16, padding:'16px 0' }}>
-          <button onClick={onClose} style={{ display:'flex', alignItems:'center', gap:5, background:'none', border:'none', cursor:'pointer', color:B.s, fontSize:13, fontWeight:600 }}>
+      <div style={{ background:B.card, borderBottom:`1px solid ${B.bd}`, padding:'0 28px', flexShrink:0 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:18, padding:'20px 0 16px' }}>
+          <button onClick={onClose} style={{ display:'flex', alignItems:'center', gap:6, background:'none', border:'none', cursor:'pointer', color:B.s, fontSize:14, fontWeight:600, fontFamily:ff('geist'), flexShrink:0 }}>
             ← Back
           </button>
-          <div style={{ width:1, height:28, background:B.bd }} />
-          <div style={{ flex:1 }}>
-            <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:2 }}>
-              <span style={{ fontSize:18, fontWeight:900, color:B.p }}>{item.name}</span>
-              <span style={{ fontSize:11, fontWeight:700, fontFamily:ff('mono'), color:B.s, background:B.bg, padding:'2px 6px', borderRadius:4 }}>{item.ticker ?? item.id}</span>
+          <div style={{ width:1, height:32, background:B.bd }} />
+          <div style={{ flex:1, minWidth:0 }}>
+            <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:5, flexWrap:'wrap' }}>
+              <span style={{ fontSize:20, fontWeight:700, color:B.p, fontFamily:ff('geist') }}>{item.name}</span>
+              <span style={{ fontSize:12, fontWeight:600, fontFamily:ff('mono'), color:B.s, background:B.bg, padding:'3px 8px', borderRadius:5 }}>{item.ticker ?? item.id}</span>
               {item.confidence === 'med' && <Bdg label="Med confidence" color={B.am} icon="⚠" />}
             </div>
-            <div style={{ fontSize:11, color:B.s }}>{item.peerGroup} · {item.state} · {item.jurisdiction} · {fmtAssets(item.assets)} assets</div>
+            <div style={{ fontSize:13, color:B.s, fontFamily:ff('geist') }}>{item.peerGroup} · {item.state} · {item.jurisdiction} · {fmtAssets(item.assets)} assets</div>
           </div>
-          <div style={{ textAlign:'center' }}>
-            <div style={{ fontSize:9, fontWeight:700, color:B.s }}>GIST</div>
-            <div style={{ fontSize:28, fontWeight:900, fontFamily:ff('mono'), color:scoreColor(item.gist) }}>{item.gist}</div>
-            <div style={{ fontSize:9, fontWeight:700, color:rb.color }}>{rb.label}</div>
+          <div style={{ textAlign:'center', flexShrink:0 }}>
+            <div style={{ fontSize:11, fontWeight:600, color:B.s, letterSpacing:'0.06em', textTransform:'uppercase', marginBottom:2 }}>GIST</div>
+            <div style={{ fontSize:32, fontWeight:700, fontFamily:ff('mono'), color:scoreColor(item.gist), lineHeight:1 }}>{item.gist}</div>
+            <div style={{ fontSize:11, fontWeight:700, color:rb.color, marginTop:3 }}>{rb.label}</div>
           </div>
-          <div style={{ textAlign:'center' }}>
-            <div style={{ fontSize:9, fontWeight:700, color:B.s }}>RANK</div>
-            <div style={{ fontSize:20, fontWeight:700, fontFamily:ff('mono'), color:B.p }}>{item.rank}</div>
+          <div style={{ textAlign:'center', flexShrink:0 }}>
+            <div style={{ fontSize:11, fontWeight:600, color:B.s, letterSpacing:'0.06em', textTransform:'uppercase', marginBottom:2 }}>RANK</div>
+            <div style={{ fontSize:24, fontWeight:700, fontFamily:ff('mono'), color:B.p, lineHeight:1 }}>{item.rank}</div>
           </div>
           {item.srtSignalRaw !== 'none' && <Bdg label={srt.label} color={srt.color} icon={srt.icon} />}
         </div>
-        <div style={{ display:'flex', gap:8, paddingBottom:0 }}>
+        <div style={{ display:'flex', gap:4, paddingBottom:0 }}>
           {detailTabs.map(t => (
             <button key={t.id} onClick={() => setSub(t.id)} style={{
-              display:'flex', alignItems:'center', gap:6, padding:'8px 14px',
-              background:'none', border:'none', cursor:'pointer', fontSize:13, fontWeight:600,
-              color: sub===t.id ? B.bl : B.s,
+              display:'flex', alignItems:'center', gap:7, padding:'10px 16px',
+              background:'none', border:'none', cursor:'pointer', fontSize:14, fontWeight:600,
+              color: sub===t.id ? B.bl : B.s, fontFamily:ff('geist'),
               borderBottom: sub===t.id ? `2px solid ${B.bl}` : '2px solid transparent',
             }}>{t.icon} {t.label}</button>
           ))}
@@ -599,7 +599,7 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
       </div>
 
       {/* Body */}
-      <div style={{ flex:1, overflowY:'auto', padding:24 }}>
+      <div style={{ flex:1, overflowY:'auto', padding:28 }}>
         <div style={{ maxWidth:1000 }}>
           {sub === 'summary' && (
             <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
@@ -607,13 +607,13 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
               <Sec title="Pillar scores" icon="⊟">
                 <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}>
                   {([['Capital','35%',item.capital,scoreColor(item.capital)],['Balance sheet','30%',item.balance,scoreColor(item.balance)],['Risk-adj ROE','35%',item.riskRoe,scoreColor(item.riskRoe)],['GIST','blend',item.gist,scoreColor(item.gist)]] as [string,string,number,string][]).map(([lbl,wt,score,col]) => (
-                    <div key={lbl} style={{ background:B.bg, borderRadius:9, border:`1px solid ${B.bd}`, padding:12, minWidth:130 }}>
-                      <div style={{ fontSize:9, fontWeight:700, color:B.s, textTransform:'uppercase', marginBottom:4 }}>{lbl}</div>
-                      <div style={{ fontSize:26, fontWeight:900, fontFamily:ff('mono'), color:col }}>{score}</div>
-                      <div style={{ height:5, borderRadius:99, background:B.bd, marginTop:6, marginBottom:4 }}>
-                        <div style={{ height:5, borderRadius:99, background:col, width:`${score}%` }} />
+                    <div key={lbl} style={{ background:B.bg, borderRadius:10, border:`1px solid ${B.bd}`, padding:16, minWidth:140 }}>
+                      <div style={{ fontSize:11, fontWeight:600, color:B.s, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:6, fontFamily:ff('geist') }}>{lbl}</div>
+                      <div style={{ fontSize:30, fontWeight:700, fontFamily:ff('mono'), color:col, lineHeight:1 }}>{score}</div>
+                      <div style={{ height:4, borderRadius:99, background:B.bd, marginTop:10, marginBottom:6 }}>
+                        <div style={{ height:4, borderRadius:99, background:col, width:`${score}%`, transition:'width 0.6s ease' }} />
                       </div>
-                      <div style={{ fontSize:9, color:B.s }}>weight {wt}</div>
+                      <div style={{ fontSize:12, color:B.s, fontFamily:ff('geist') }}>weight {wt}</div>
                     </div>
                   ))}
                 </div>
@@ -624,18 +624,18 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
                     <Bdg label={arcData.label} color={arcData.color} icon={arcData.icon} />
                     <Bdg label={rb.label} color={rb.color} />
                   </div>
-                  <div style={{ fontSize:13, color:B.p }}>{arcData.blurb}</div>
+                  <div style={{ fontSize:14, color:B.p, lineHeight:1.65, fontFamily:ff('geist') }}>{arcData.blurb}</div>
                   <div>
                     <Eyebrow label="Indicated capital actions" />
                     <FlowWrap gap={6} >
                       {arcData.actions.map(a => (
-                        <span key={a} style={{ fontSize:10, fontWeight:600, color:arcData.color,
+                        <span key={a} style={{ fontSize:12, fontWeight:600, color:arcData.color,
                           background:`${arcData.color}1A`, border:`1px solid ${arcData.color}40`,
-                          padding:'4px 8px', borderRadius:5 }}>{a}</span>
+                          padding:'5px 10px', borderRadius:6 }}>{a}</span>
                       ))}
                     </FlowWrap>
                   </div>
-                  <div style={{ fontSize:11, color:B.s, fontStyle:'italic' }}>Instrument-neutral read. Synthetic risk transfer is one option among the actions above.</div>
+                  <div style={{ fontSize:13, color:B.s, fontStyle:'italic', fontFamily:ff('geist') }}>Instrument-neutral read. Synthetic risk transfer is one option among the actions above.</div>
                 </div>
               </Sec>
               {(item.driversPlus.length > 0 || item.driversMinus.length > 0) && (
@@ -643,13 +643,13 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
                   <div style={{ display:'flex', gap:20 }}>
                     {[['Supporting', item.driversPlus, B.gr,'↑'],['Pressuring',item.driversMinus,B.rd,'↓']].map(([title, items, color, icon]) => (
                       <div key={title as string} style={{ flex:1 }}>
-                        <div style={{ fontSize:10, fontWeight:700, color:color as string, textTransform:'uppercase', marginBottom:8 }}>{title as string}</div>
+                        <div style={{ fontSize:12, fontWeight:700, color:color as string, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:10 }}>{title as string}</div>
                         {(items as string[]).length === 0
-                          ? <div style={{ fontSize:11, color:B.s }}>None noted this quarter</div>
+                          ? <div style={{ fontSize:13, color:B.s, fontFamily:ff('geist') }}>None noted this quarter</div>
                           : (items as string[]).map(t => (
-                            <div key={t} style={{ display:'flex', gap:6, marginBottom:6, alignItems:'flex-start' }}>
-                              <span style={{ color:color as string, marginTop:1 }}>{icon as string}</span>
-                              <span style={{ fontSize:11, color:B.p }}>{t}</span>
+                            <div key={t} style={{ display:'flex', gap:8, marginBottom:8, alignItems:'flex-start' }}>
+                              <span style={{ color:color as string, marginTop:2, fontSize:14 }}>{icon as string}</span>
+                              <span style={{ fontSize:13, color:B.p, lineHeight:1.55, fontFamily:ff('geist') }}>{t}</span>
                             </div>
                           ))}
                       </div>
@@ -660,9 +660,9 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
               {item.driversQuestions.length > 0 && (
                 <Sec title="Questions a diligence team would ask" icon="?">
                   {item.driversQuestions.map((q, i) => (
-                    <div key={i} style={{ display:'flex', gap:8, marginBottom:8, alignItems:'flex-start' }}>
-                      <span style={{ fontSize:11, fontWeight:700, fontFamily:ff('mono'), color:B.bl, minWidth:16 }}>{i+1}</span>
-                      <span style={{ fontSize:12, color:B.p }}>{q}</span>
+                    <div key={i} style={{ display:'flex', gap:12, marginBottom:12, alignItems:'flex-start' }}>
+                      <span style={{ fontSize:13, fontWeight:700, fontFamily:ff('mono'), color:B.bl, minWidth:20, flexShrink:0 }}>{i+1}</span>
+                      <span style={{ fontSize:14, color:B.p, lineHeight:1.6, fontFamily:ff('geist') }}>{q}</span>
                     </div>
                   ))}
                 </Sec>
@@ -680,7 +680,7 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
                   ['Net worth (CU)', fmtPct(m.netWorth), B.p],
                   ['Capital generation', `${fmtNum(m.capGen,2)}x`, (m.capGen??1) < 1 ? B.am : B.gr],
                 ]} />
-                <div style={{ fontSize:12, color:B.s, lineHeight:1.6 }}>
+                <div style={{ fontSize:14, color:B.s, lineHeight:1.7, fontFamily:ff('geist') }}>
                   {item.isCU
                     ? 'As a credit union, the binding capital measure is the net worth ratio rather than CET1. NCUA does not yet recognise synthetic risk transfer for regulatory net worth relief, which is an active area of engagement.'
                     : 'The capital pillar weighs the level and trend of the ratio against internal generation and the pace of RWA growth. A binding ratio with strong earnings is the classic capital-efficiency profile for synthetic protection.'}
@@ -733,7 +733,7 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
                     ['Efficiency', fmtPct(m.efficiency), B.p],
                     ['Cap generation', `${fmtNum(m.capGen,2)}x`, (m.capGen??1) < 1 ? B.am : B.gr],
                   ]} />
-                  {rorwa != null && <div style={{ fontSize:12, color:B.s, lineHeight:1.6 }}>
+                  {rorwa != null && <div style={{ fontSize:14, color:B.s, lineHeight:1.7, fontFamily:ff('geist') }}>
                     {rorwa >= 1.8 ? `Return on RWA of ${fmtPct(rorwa,2)} is strong: the balance sheet is converting risk-weighted capital into earnings efficiently.`
                     : rorwa < 1.4 ? `Return on RWA of ${fmtPct(rorwa,2)} is on the softer side of the universe. Capital productivity is a watch item.`
                     : `Return on RWA of ${fmtPct(rorwa,2)} sits around the middle of the scored universe.`}
@@ -747,7 +747,7 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
                     ['Net charge-offs', fmtPct(m.nco,2), m.nco > 0.4 ? B.rd : m.nco > 0.3 ? B.am : B.gr],
                     ['Allowance / loans', fmtPct(m.allowance,2), B.p],
                   ]} />
-                  <div style={{ fontSize:12, color:B.s }}>NPA at {fmtPct(m.npa,2)}, NCO at {fmtPct(m.nco,2)}, allowance coverage at {fmtPct(m.allowance,2)} of loans.</div>
+                  <div style={{ fontSize:14, color:B.s, fontFamily:ff('geist') }}>NPA at {fmtPct(m.npa,2)}, NCO at {fmtPct(m.nco,2)}, allowance coverage at {fmtPct(m.allowance,2)} of loans.</div>
                 </div>
               </Sec>
             </div>
@@ -757,13 +757,13 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
               <Sec title={`SRT signal · ${srt.label}`} icon={srt.icon}>
                 <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
                   <Bdg label={srt.label} color={srt.color} icon={srt.icon} />
-                  <div style={{ fontSize:13, color:B.p }}>{item.srtReason || srt.sub}</div>
+                  <div style={{ fontSize:14, color:B.p, lineHeight:1.65, fontFamily:ff('geist') }}>{item.srtReason || srt.sub}</div>
                   {item.srtSignalRaw !== 'none' && (
-                    <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+                    <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
                       {['A synthetic structure could transfer credit risk on a reference pool to third-party protection sellers','Regulatory capital relief depends on a significant-risk-transfer assessment in the relevant jurisdiction','This is a public-source signal, not a recommendation, and would require institution-level diligence'].map(t => (
-                        <div key={t} style={{ display:'flex', gap:6, alignItems:'flex-start' }}>
-                          <span style={{ color:srt.color, fontSize:9, marginTop:3 }}>→</span>
-                          <span style={{ fontSize:12, color:B.p }}>{t}</span>
+                        <div key={t} style={{ display:'flex', gap:10, alignItems:'flex-start' }}>
+                          <span style={{ color:srt.color, fontSize:12, marginTop:2, flexShrink:0 }}>→</span>
+                          <span style={{ fontSize:14, color:B.p, lineHeight:1.6, fontFamily:ff('geist') }}>{t}</span>
                         </div>
                       ))}
                     </div>
@@ -779,7 +779,7 @@ function InstitutionDetail({ item, onClose }: { item: Institution; onClose: () =
                     </span>
                   ))}
                 </FlowWrap>
-                <div style={{ fontSize:11, color:B.s, marginTop:12, lineHeight:1.6 }}>{GISTData.caveat}</div>
+                <div style={{ fontSize:13, color:B.s, marginTop:14, lineHeight:1.7, fontFamily:ff('geist') }}>{GISTData.caveat}</div>
               </Sec>
             </div>
           )}
@@ -1020,20 +1020,20 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
     tag: string; weight: string; color: string; title: string; body: string; bullets: string[];
   }) {
     return (
-      <div style={{ background:B.bg, borderRadius:9, border:`1px solid ${B.bd}`, padding:14 }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8 }}>
-          <span style={{ fontSize:10, fontWeight:700, color, background:`${color}1F`, padding:'3px 8px', borderRadius:5 }}>PILLAR {tag}</span>
-          <span style={{ display:'flex', alignItems:'center', gap:4 }}>
-            <span style={{ fontSize:10, color:B.s }}>weight</span>
-            <span style={{ fontSize:14, fontWeight:900, fontFamily:ff('mono'), color }}>{weight}</span>
+      <div style={{ background:B.bg, borderRadius:12, border:`1px solid ${B.bd}`, padding:20 }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12 }}>
+          <span style={{ fontSize:11, fontWeight:700, color, background:`${color}1F`, padding:'4px 10px', borderRadius:6, letterSpacing:'0.04em' }}>PILLAR {tag}</span>
+          <span style={{ display:'flex', alignItems:'center', gap:5 }}>
+            <span style={{ fontSize:12, color:B.s, fontFamily:ff('geist') }}>weight</span>
+            <span style={{ fontSize:16, fontWeight:700, fontFamily:ff('mono'), color }}>{weight}</span>
           </span>
         </div>
-        <div style={{ fontSize:15, fontWeight:700, color:B.p, marginBottom:6 }}>{title}</div>
-        <div style={{ fontSize:12, color:B.s, marginBottom:8, lineHeight:1.5 }}>{body}</div>
+        <div style={{ fontSize:17, fontWeight:700, color:B.p, marginBottom:8, fontFamily:ff('geist') }}>{title}</div>
+        <div style={{ fontSize:14, color:B.s, marginBottom:14, lineHeight:1.65, fontFamily:ff('geist') }}>{body}</div>
         {bullets.map(b => (
-          <div key={b} style={{ display:'flex', gap:6, marginBottom:4, alignItems:'flex-start' }}>
-            <span style={{ width:4, height:4, borderRadius:'50%', background:color, marginTop:6, flexShrink:0, display:'block' }} />
-            <span style={{ fontSize:11, color:B.p }}>{b}</span>
+          <div key={b} style={{ display:'flex', gap:10, marginBottom:7, alignItems:'flex-start' }}>
+            <span style={{ width:5, height:5, borderRadius:'50%', background:color, marginTop:7, flexShrink:0, display:'block' }} />
+            <span style={{ fontSize:13, color:B.p, lineHeight:1.5, fontFamily:ff('geist') }}>{b}</span>
           </div>
         ))}
       </div>
@@ -1330,7 +1330,7 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
                   <PillarCard tag="03" weight="35%" color={B.bl} title="Risk-adjusted ROE creation"
                     body="Are returns coming from durable economics, or temporary gains, hidden leverage, or under-provisioning?"
                     bullets={['ROE / ROA / return on RWA','Pre-provision net revenue strength','Credit-cost-adjusted profitability','Earnings volatility + sustainability','Capital consumed per dollar of earnings']} />
-                  <div style={{ background:`${B.p}08`, borderRadius:8, padding:12, fontSize:13, fontFamily:ff('mono') }}>
+                  <div style={{ background:`${B.p}08`, borderRadius:10, padding:16, fontSize:15, fontFamily:ff('mono'), lineHeight:1.8 }}>
                     <strong style={{ color:B.p }}>GIST</strong>
                     <span style={{ color:B.s }}> = </span>
                     <strong style={{ color:B.gr }}>0.35 · Capital</strong>
@@ -1342,9 +1342,9 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
                 </div>
               </Sec>
               <Sec title="Instrument neutrality" icon="⚖">
-                <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
-                  <div style={{ fontSize:12, color:B.p, lineHeight:1.6 }}>GIST does not reward the use of any particular tool. Synthetic risk transfer, CRT, securitisation, loan sales, runoff, buybacks, capital retention, deposit repricing, and origination discipline are all instruments. The index rewards the right action for the franchise, the constraints, and management's stated objectives, and sometimes the right action is no action at all.</div>
-                  <div style={{ fontSize:12, color:B.s, lineHeight:1.6 }}>A bank can score highly by growing, by slowing, by selling, by transferring risk, by returning capital, or by holding steady, provided the decision was the best available path for its situation.</div>
+                <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+                  <div style={{ fontSize:14, color:B.p, lineHeight:1.7, fontFamily:ff('geist') }}>GIST does not reward the use of any particular tool. Synthetic risk transfer, CRT, securitisation, loan sales, runoff, buybacks, capital retention, deposit repricing, and origination discipline are all instruments. The index rewards the right action for the franchise, the constraints, and management's stated objectives, and sometimes the right action is no action at all.</div>
+                  <div style={{ fontSize:14, color:B.s, lineHeight:1.7, fontFamily:ff('geist') }}>A bank can score highly by growing, by slowing, by selling, by transferring risk, by returning capital, or by holding steady, provided the decision was the best available path for its situation.</div>
                 </div>
               </Sec>
               <Sec title="Rating tiers & archetypes" icon="≡">
@@ -1355,9 +1355,9 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
                       {[88,80,68,52,40].map(s => {
                         const rb = ratingBand(s);
                         return (
-                          <span key={s} style={{ display:'flex', alignItems:'center', gap:5, fontSize:11, fontWeight:700,
-                            background:B.bg, border:`1px solid ${B.bd}`, padding:'5px 9px', borderRadius:6 }}>
-                            <span style={{ width:8, height:8, borderRadius:'50%', background:rb.color, display:'inline-block' }} />
+                          <span key={s} style={{ display:'flex', alignItems:'center', gap:7, fontSize:13, fontWeight:600,
+                            background:B.bg, border:`1px solid ${B.bd}`, padding:'7px 13px', borderRadius:8, fontFamily:ff('geist') }}>
+                            <span style={{ width:9, height:9, borderRadius:'50%', background:rb.color, display:'inline-block', flexShrink:0 }} />
                             <span style={{ color:B.p }}>{rb.label}</span>
                           </span>
                         );
@@ -1366,15 +1366,15 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
                   </div>
                   <div>
                     <Eyebrow label="Capital archetypes" />
-                    <div style={{ display:'flex', flexDirection:'column', gap:8, marginTop:8 }}>
+                    <div style={{ display:'flex', flexDirection:'column', gap:12, marginTop:4 }}>
                       {ARC_ORDER.map(k => {
                         const a = ARC[k];
                         return (
-                          <div key={k} style={{ display:'flex', gap:8, alignItems:'flex-start' }}>
-                            <span style={{ color:a.color, width:18, flexShrink:0 }}>{a.icon}</span>
+                          <div key={k} style={{ display:'flex', gap:12, alignItems:'flex-start' }}>
+                            <span style={{ color:a.color, width:20, flexShrink:0, fontSize:16, marginTop:1 }}>{a.icon}</span>
                             <div>
-                              <div style={{ fontSize:12, fontWeight:600, color:B.p }}>{a.label}</div>
-                              <div style={{ fontSize:11, color:B.s }}>{a.blurb}</div>
+                              <div style={{ fontSize:14, fontWeight:600, color:B.p, fontFamily:ff('geist'), marginBottom:2 }}>{a.label}</div>
+                              <div style={{ fontSize:13, color:B.s, lineHeight:1.55, fontFamily:ff('geist') }}>{a.blurb}</div>
                             </div>
                           </div>
                         );
@@ -1386,9 +1386,9 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
               <Sec title="Sources tracked" icon="⊡">
                 <FlowWrap gap={8}>
                   {GISTData.sources.map(s => (
-                    <span key={s} style={{ display:'flex', alignItems:'center', gap:5, fontSize:11, fontWeight:500,
-                      background:B.bg, border:`1px solid ${B.bd}`, padding:'5px 10px', borderRadius:6 }}>
-                      <span style={{ color:B.gr }}>✓</span> {s}
+                    <span key={s} style={{ display:'flex', alignItems:'center', gap:7, fontSize:13, fontWeight:500,
+                      background:B.bg, border:`1px solid ${B.bd}`, padding:'7px 13px', borderRadius:8, fontFamily:ff('geist') }}>
+                      <span style={{ color:B.gr, fontWeight:700 }}>✓</span> {s}
                     </span>
                   ))}
                 </FlowWrap>
@@ -1399,8 +1399,8 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
         </div>
 
         {/* Disclaimer */}
-        <div style={{ marginTop:32, padding:14, background:`${B.p}08`, borderRadius:8, border:`1px solid ${B.bd}`,
-          fontSize:11, color:B.s, lineHeight:1.6 }}>
+        <div style={{ marginTop:32, padding:18, background:`${B.p}08`, borderRadius:10, border:`1px solid ${B.bd}`,
+          fontSize:13, color:B.s, lineHeight:1.7, fontFamily:ff('geist') }}>
           {GISTData.caveat}
         </div>
 

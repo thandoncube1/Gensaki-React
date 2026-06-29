@@ -252,16 +252,16 @@ function StepBar({ current }: { current: Step }) {
       {STEP_LABELS.map((label, i) => (
         <React.Fragment key={label}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            <div style={{ width: 28, height: 28, borderRadius: '50%',
+            <div style={{ width: 30, height: 30, borderRadius: '50%',
               background: i < idx ? B.bl : i === idx ? B.bl : B.bd,
               display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {i < idx
                 ? <span style={{ color: '#fff', fontSize: 13 }}>✓</span>
-                : <span style={{ fontSize: 11, fontWeight: 600,
+                : <span style={{ fontSize: 12, fontWeight: 600,
                     color: i === idx ? '#fff' : B.s }}>{i + 1}</span>
               }
             </div>
-            <span style={{ fontSize: 10, color: i === idx ? B.p : B.s, fontWeight: i === idx ? 600 : 400,
+            <span style={{ fontSize: 11, color: i === idx ? B.p : B.s, fontWeight: i === idx ? 600 : 400,
               letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{label}</span>
           </div>
           {i < STEP_LABELS.length - 1 && (
@@ -351,8 +351,8 @@ function HeroTrancheStack() {
           <div style={{ flex: 1, height: t.h, borderRadius: 6, background: t.color + '22',
             border: `1px solid ${t.color}44`, display: 'flex', alignItems: 'center',
             paddingLeft: 12, gap: 8 }}>
-            <span style={{ fontSize: 12, fontWeight: 600, color: t.color, fontFamily: FONT }}>{t.label}</span>
-            <span style={{ fontSize: 11, color: t.color + 'aa', fontFamily: MONO }}>{t.pct}</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: t.color, fontFamily: FONT }}>{t.label}</span>
+            <span style={{ fontSize: 12, color: t.color + 'aa', fontFamily: MONO }}>{t.pct}</span>
           </div>
         </div>
       ))}
@@ -369,19 +369,17 @@ function HeroFlow() {
     { label: 'Fit Score',        sub: '82 / 100',         color: C.green },
   ];
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
       {nodes.map((n, i) => (
         <React.Fragment key={n.label}>
-          <div style={{ padding: '12px 18px', borderRadius: 10,
+          <div style={{ padding: '14px 20px', borderRadius: 10,
             background: n.color === C.green ? C.mint1 : '#E8F9FF',
-            border: `1px solid ${n.color}40`, minWidth: 140 }}>
-            <div style={{ fontSize: 13, fontWeight: 600, color: C.ink, fontFamily: FONT }}>{n.label}</div>
-            <div style={{ fontSize: 11, color: C.mute, fontFamily: MONO, marginTop: 2 }}>{n.sub}</div>
+            border: `1px solid ${n.color}40`, minWidth: 148 }}>
+            <div style={{ fontSize: 14, fontWeight: 600, color: C.ink, fontFamily: FONT }}>{n.label}</div>
+            <div style={{ fontSize: 12, color: C.mute, fontFamily: MONO, marginTop: 3 }}>{n.sub}</div>
           </div>
           {i < nodes.length - 1 && (
-            <div style={{ width: 32, height: 1, background: C.line, position: 'relative', flexShrink: 0 }}>
-              <span style={{ position: 'absolute', right: -4, top: -7, fontSize: 14, color: C.mute }}>›</span>
-            </div>
+            <span style={{ fontSize: 18, color: C.mute, flexShrink: 0, lineHeight: 1, userSelect: 'none' }}>→</span>
           )}
         </React.Fragment>
       ))}
@@ -445,9 +443,9 @@ function SuitLanding({ onStart }: { onStart: () => void }) {
       </div>
 
       {/* visuals strip */}
-      <div style={{ padding: `40px ${hPad}px`, borderTop: `1px solid ${C.line}` }}>
-        <div style={{ maxWidth: 1180, margin: '0 auto', display: 'flex', gap: 40,
-          alignItems: 'center', flexWrap: 'wrap' }}>
+      <div style={{ padding: `0 ${hPad}px 64px` }}>
+        <div style={{ maxWidth: 1180, margin: '0 auto', borderTop: `1px solid ${C.line}`,
+          paddingTop: 40, display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap' }}>
           <HeroFlow />
           <div style={{ flex: 1, minWidth: 200 }}>
             <HeroTrancheStack />
@@ -524,7 +522,7 @@ function SuitMode({ persona, onSelect, onBack }: {
               <div style={{ fontSize: 15, fontWeight: 600, color: B.p }}>{m.label}</div>
               <div style={{ fontSize: 13, color: B.s, marginTop: 2 }}>{m.subtitle}</div>
             </div>
-            <span style={{ marginLeft: 'auto', color: B.s, fontSize: 18 }}>›</span>
+            <span style={{ marginLeft: 'auto', color: B.s, fontSize: 16 }}>→</span>
           </button>
         ))}
       </div>
@@ -571,7 +569,7 @@ function SuitInstitutionSearch({ onSelect, onSkip, onBack }: {
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 14, fontWeight: 600, color: B.p }}>{inst.name}</div>
-                  <div style={{ fontSize: 12, color: B.s, marginTop: 2 }}>
+                  <div style={{ fontSize: 13, color: B.s, marginTop: 3 }}>
                     {inst.type} · {inst.jurisdiction} · ${inst.assets}M assets
                   </div>
                 </div>
@@ -848,7 +846,7 @@ function SuitResults({ form, score, persona, onRestart, onQuote, onInvestorEOI, 
             <StatBlock label="CET1 improvement"    value={`~${(score / 100 * 1.4).toFixed(1)}%`} color={B.bl} />
             <StatBlock label="Lending headroom"    value={`$${Math.round(parseNum(capEstimate) * 12.5)}M`} color={B.pu} />
           </div>
-          <p style={{ marginTop: 16, fontSize: 13, color: B.s, fontFamily: FONT }}>
+          <p style={{ marginTop: 16, fontSize: 14, color: B.s, fontFamily: FONT, lineHeight: 1.65 }}>
             Estimates assume 65% portfolio RWA weight and 8% minimum CET1 hurdle. Actual figures depend on transaction structure and regulatory approval.
           </p>
         </Card>
@@ -863,14 +861,14 @@ function SuitResults({ form, score, persona, onRestart, onQuote, onInvestorEOI, 
               { label: 'Credit quality',  val: form.quality,         fit: form.quality !== 'Stressed' },
               { label: 'SRT explored',    val: form.explored,        fit: form.explored === 'Yes' },
             ].map(r => (
-              <div key={r.label} style={{ padding: '12px 14px', borderRadius: 10,
+              <div key={r.label} style={{ padding: '14px 16px', borderRadius: 10,
                 background: r.fit ? B.gr + '0a' : B.rd + '0a',
                 border: `1px solid ${r.fit ? B.gr : B.rd}22`,
-                display: 'flex', gap: 10, alignItems: 'center' }}>
+                display: 'flex', gap: 12, alignItems: 'center' }}>
                 <span style={{ fontSize: 16 }}>{r.fit ? '✓' : '!'}</span>
                 <div>
-                  <div style={{ fontSize: 12, color: B.s, fontFamily: FONT }}>{r.label}</div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: B.p, fontFamily: FONT }}>{r.val}</div>
+                  <div style={{ fontSize: 13, color: B.s, fontFamily: FONT, marginBottom: 2 }}>{r.label}</div>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: B.p, fontFamily: FONT }}>{r.val}</div>
                 </div>
               </div>
             ))}
@@ -888,8 +886,8 @@ function SuitResults({ form, score, persona, onRestart, onQuote, onInvestorEOI, 
             ].map(r => (
               <div key={r.title} style={{ padding: '12px 14px', borderRadius: 10,
                 background: B.bg, border: `1px solid ${B.bd}` }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: B.p, fontFamily: FONT, marginBottom: 4 }}>{r.title}</div>
-                <div style={{ fontSize: 13, color: B.s, fontFamily: FONT, lineHeight: 1.5 }}>{r.body}</div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: B.p, fontFamily: FONT, marginBottom: 6 }}>{r.title}</div>
+                <div style={{ fontSize: 14, color: B.s, fontFamily: FONT, lineHeight: 1.65 }}>{r.body}</div>
               </div>
             ))}
           </div>
@@ -903,7 +901,7 @@ function SuitResults({ form, score, persona, onRestart, onQuote, onInvestorEOI, 
               <div key={a.label} style={{ display: 'flex', gap: 12, padding: '10px 0',
                 borderBottom: `1px solid ${B.bd}` }}>
                 <span style={{ fontSize: 14, fontWeight: 600, color: B.p, fontFamily: FONT, minWidth: 180 }}>{a.label}</span>
-                <span style={{ fontSize: 13, color: B.s, fontFamily: FONT }}>{a.note}</span>
+                <span style={{ fontSize: 14, color: B.s, fontFamily: FONT, lineHeight: 1.6 }}>{a.note}</span>
               </div>
             ))}
           </div>
@@ -924,7 +922,7 @@ function SuitResults({ form, score, persona, onRestart, onQuote, onInvestorEOI, 
                 <Pill label={r.severity} color={r.severity === 'High' ? B.rd : r.severity === 'Medium' ? B.am : B.gr} />
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: B.p, fontFamily: FONT }}>{r.risk}</div>
-                  <div style={{ fontSize: 13, color: B.s, fontFamily: FONT, marginTop: 2 }}>{r.note}</div>
+                  <div style={{ fontSize: 14, color: B.s, fontFamily: FONT, marginTop: 4, lineHeight: 1.6 }}>{r.note}</div>
                 </div>
               </div>
             ))}
@@ -956,11 +954,11 @@ function SuitResults({ form, score, persona, onRestart, onQuote, onInvestorEOI, 
             ].map(s => (
               <div key={s.n} style={{ display: 'flex', gap: 16, padding: '14px 0',
                 borderBottom: `1px solid ${B.bd}` }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: B.bl, fontFamily: MONO,
+                <span style={{ fontSize: 14, fontWeight: 700, color: B.bl, fontFamily: MONO,
                   flexShrink: 0, marginTop: 2 }}>{s.n}</span>
                 <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: B.p, fontFamily: FONT }}>{s.label}</div>
-                  <div style={{ fontSize: 13, color: B.s, fontFamily: FONT, marginTop: 3 }}>{s.body}</div>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: B.p, fontFamily: FONT }}>{s.label}</div>
+                  <div style={{ fontSize: 14, color: B.s, fontFamily: FONT, marginTop: 5, lineHeight: 1.65 }}>{s.body}</div>
                 </div>
               </div>
             ))}
@@ -1125,9 +1123,9 @@ function WizardShell({ children, onBack, title, subtitle }: {
           </button>
         )}
         {title && (
-          <div style={{ marginBottom: 28 }}>
-            <h2 style={{ margin: 0, fontSize: 28, fontWeight: 700, color: B.p }}>{title}</h2>
-            {subtitle && <p style={{ margin: '8px 0 0', fontSize: 15, color: B.s }}>{subtitle}</p>}
+          <div style={{ marginBottom: 32 }}>
+            <h2 style={{ margin: 0, fontSize: 30, fontWeight: 700, color: B.p, letterSpacing: '-0.02em' }}>{title}</h2>
+            {subtitle && <p style={{ margin: '10px 0 0', fontSize: 16, color: B.s, lineHeight: 1.5 }}>{subtitle}</p>}
           </div>
         )}
         {children}
@@ -1140,17 +1138,17 @@ function WizardShell({ children, onBack, title, subtitle }: {
 
 function SectionHead({ children }: { children: React.ReactNode }) {
   return (
-    <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: B.p, fontFamily: FONT,
-      letterSpacing: '-0.01em' }}>{children}</h3>
+    <h3 style={{ margin: 0, fontSize: 17, fontWeight: 700, color: B.p, fontFamily: FONT,
+      letterSpacing: '-0.015em' }}>{children}</h3>
   );
 }
 
 function StatBlock({ label, value, color }: { label: string; value: string; color: string }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <span style={{ fontSize: 30, fontWeight: 700, color, fontFamily: MONO }}>{value}</span>
-      <span style={{ fontSize: 12, color: B.s, fontFamily: FONT, textTransform: 'uppercase',
-        letterSpacing: '0.06em' }}>{label}</span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      <span style={{ fontSize: 32, fontWeight: 700, color, fontFamily: MONO, lineHeight: 1 }}>{value}</span>
+      <span style={{ fontSize: 13, color: B.s, fontFamily: FONT, textTransform: 'uppercase',
+        letterSpacing: '0.06em', marginTop: 2 }}>{label}</span>
     </div>
   );
 }
@@ -1160,8 +1158,8 @@ function ActionBtn({ label, color, onClick, outline }: {
 }) {
   return (
     <button onClick={onClick}
-      style={{ padding: '10px 18px', borderRadius: 8, fontFamily: FONT, cursor: 'pointer',
-        fontSize: 13, fontWeight: 600, transition: 'all 0.15s',
+      style={{ padding: '11px 20px', borderRadius: 8, fontFamily: FONT, cursor: 'pointer',
+        fontSize: 14, fontWeight: 600, transition: 'all 0.15s',
         ...(outline
           ? { border: `1.5px solid ${color}`, background: 'transparent', color }
           : { border: 'none', background: color, color: '#fff' }) }}>
