@@ -3,6 +3,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { CTAButton, HeroEyebrow, HeaderNav } from '../components/HeaderNav';
+import { PageFooter } from '../components/PageFooter';
 
 // ─── Blotter palette ──────────────────────────────────────────────────────────
 const B = {
@@ -1395,6 +1396,10 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
         <div style={{ marginTop:32, padding:14, background:`${B.p}08`, borderRadius:8, border:`1px solid ${B.bd}`,
           fontSize:11, color:B.s, lineHeight:1.6 }}>
           {GISTData.caveat}
+        </div>
+
+        <div style={{ marginTop: isCompact ? 56 : 96 }}>
+          <PageFooter isCompact={isCompact} />
         </div>
 
       </div>

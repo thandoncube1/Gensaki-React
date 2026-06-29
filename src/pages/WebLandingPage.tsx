@@ -5,7 +5,8 @@
 import React, {
   useState, useEffect, useRef, useCallback,
 } from 'react';
-import { Wordmark, CTAButton, HeroEyebrow, HeaderNav } from '../components/HeaderNav';
+import { CTAButton, HeroEyebrow, HeaderNav } from '../components/HeaderNav';
+import { PageFooter } from '../components/PageFooter';
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 // Mirrors the fileprivate Swift tokens exactly.
@@ -1085,49 +1086,6 @@ function WhoForSection({ isCompact }: { isCompact: boolean }) {
 
 // ─── BottomWashSection ────────────────────────────────────────────────────────
 
-function FooterLink({ text }: { text: string }) {
-  const [h, setH] = useState(false);
-  return (
-    <div onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-         style={{ fontFamily: ff('geist'), fontSize: 14, fontWeight: 400, color: h ? C.ink : C.ink2, padding: '6px 0', cursor: 'pointer', transition: 'color 0.1s ease-out' }}>
-      {text}
-    </div>
-  );
-}
-
-function FooterColumn({ title, links }: { title: string; links: string[] }) {
-  return (
-    <div>
-      <div style={{ fontFamily: ff('mono'), fontSize: 11, letterSpacing: '0.7px', color: C.mute, textTransform: 'uppercase', marginBottom: 16 }}>
-        {title}
-      </div>
-      {links.map((l, i) => <FooterLink key={i} text={l} />)}
-    </div>
-  );
-}
-
-function BrandCol() {
-  return (
-    <div>
-      <Wordmark markSize={40} fontSize={20} />
-      <p style={{ fontFamily: ff('geist'), fontSize: 13, fontWeight: 400, color: C.mute, lineHeight: 1.6, maxWidth: 300, marginTop: 14 }}>
-        A turnkey SRT execution platform. Headquartered in Toronto. Built for banks, credit unions, and the investors that protect them.
-      </p>
-    </div>
-  );
-}
-
-function FooterColumns() {
-  return (
-    <>
-      <FooterColumn title="// Products"  links={['Structuring Engine', 'Documentation Rails', 'Investor Matching', 'Lifecycle Automation', 'Recognition Checks']} />
-      <FooterColumn title="// Solutions" links={['Credit Unions', 'Community Banks', 'Regional Banks', 'Asset Managers', 'Reinsurers']} />
-      <FooterColumn title="// Resources" links={['Benchmark', 'FitScore', 'Diligence', 'RegWatch', 'Linkedin ↗︎']} />
-      <FooterColumn title="// Company"   links={['About', 'Careers', 'Press', 'Contact', 'Security']} />
-    </>
-  );
-}
-
 function BottomWashSection({ isCompact }: { isCompact: boolean }) {
   const hPad = isCompact ? 20 : 40;
   return (
@@ -1136,7 +1094,6 @@ function BottomWashSection({ isCompact }: { isCompact: boolean }) {
       display: 'flex',
       flexDirection: 'column',
       paddingTop: isCompact ? 80 : 100,
-      paddingBottom: 40,
       background: [
         `linear-gradient(to bottom,${C.bg},#F0F9F1 55%)`,
         `radial-gradient(ellipse at 50% 120%,${C.mint1},${C.mint2},transparent 540px)`,
@@ -1160,41 +1117,7 @@ function BottomWashSection({ isCompact }: { isCompact: boolean }) {
       {/* Flex spacer — distributes remaining viewport height between CTA and footer */}
       <div style={{ flex: 1 }} />
 
-      <Centered hPad={hPad}>
-        <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: 48 }}>
-          {isCompact ? (
-            <>
-              <BrandCol />
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, marginTop: 40 }}>
-                <FooterColumns />
-              </div>
-            </>
-          ) : (
-            <div style={{ display: 'flex', gap: 48, alignItems: 'flex-start' }}>
-              <div style={{ flex: '0 0 320px' }}><BrandCol /></div>
-              <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 32 }}>
-                <FooterColumns />
-              </div>
-            </div>
-          )}
-        </div>
-      </Centered>
-
-      <Centered hPad={hPad}>
-        <div style={{ paddingTop: 48, fontFamily: ff('mono'), fontSize: 11.5, letterSpacing: '0.4px', color: C.mute }}>
-          {isCompact ? (
-            <>
-              <div>Gensaki, © 2026, All rights reserved</div>
-              <div style={{ marginTop: 10 }}>Privacy · Terms</div>
-            </>
-          ) : (
-            <div style={{ display: 'flex' }}>
-              <span style={{ flex: 1 }}>Gensaki, © 2026, All rights reserved</span>
-              <span>Privacy   ·   Terms</span>
-            </div>
-          )}
-        </div>
-      </Centered>
+      <PageFooter isCompact={isCompact} />
     </div>
   );
 }

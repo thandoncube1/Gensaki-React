@@ -12,6 +12,7 @@ import './index.css';
 import WebLandingPage from './pages/WebLandingPage';
 import AuthView from './pages/AuthViews';
 import GISTIndexView from './pages/GISTIndex';
+import DiligenceView from './pages/Diligence';
 
 // ─── Route → selectedItem mapping (for nav-link highlighting) ─────────────────
 const ROUTE_ITEM: Record<string, string> = {
@@ -55,6 +56,10 @@ function AppRoutes() {
       <Route
         path="/benchmark"
         element={<GISTIndexView onSelectItem={onSelectItem} />}
+      />
+      <Route
+        path="/diligence"
+        element={<DiligenceView onSelectItem={onSelectItem} />}
       />
       <Route
         path="/signin"
