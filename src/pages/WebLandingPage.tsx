@@ -421,49 +421,68 @@ function TopWashSection({ isCompact }: { isCompact: boolean }) {
   const hPad = isCompact ? 20 : 40;
   return (
     <div style={{
-      paddingBottom: 40,
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
       background: [
-        `linear-gradient(to bottom, #F2FBF4, ${C.bg} 42%)`,
-        `radial-gradient(ellipse at 50% -20%, ${C.mint1}, ${C.mint2}, transparent 560px)`,
+        `linear-gradient(to bottom, #F2FBF4, ${C.bg} 55%)`,
+        `radial-gradient(ellipse at 50% -20%, ${C.mint1}, ${C.mint2}, transparent 60%)`,
       ].join(', '),
     }}>
-      <Centered hPad={hPad}>
-        {/* Top padding reserves space below the invisible fixed header */}
-        <div style={{ paddingTop: isCompact ? 120 : 160, paddingBottom: 32 }}>
-          <HeroEyebrow text="SRT pilots open for Q4 2026, limited capacity" />
-        </div>
+      {/* Reserve space below the fixed transparent nav */}
+      <div style={{ height: 80, flexShrink: 0 }} />
 
-        <div style={{
-          fontFamily: ff('geist'),
-          fontSize: isCompact ? 46 : 88,
-          fontWeight: 500,
-          letterSpacing: isCompact ? '-1.6px' : '-3px',
-          lineHeight: 1,
-          marginBottom: 28,
-        }}>
-          <span style={{ color: C.ink }}>Bank & Credit Union<br />Capital Relief, </span>
-          <span style={{ color: C.mute, fontWeight: 400 }}>On Demand.</span>
-        </div>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', padding: `0 ${hPad}px` }}>
+        <div style={{ maxWidth: 1180, width: '100%', margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
 
-        <div style={{ marginBottom: 40 }}>
-          {[
-            '// A turnkey Significant Risk Transfer execution platform.',
-            '// Unlock CET1, keep the loans, grow the book, without',
-            '// building an internal CRT desk.',
-          ].map((line, i) => (
-            <div key={i} style={{ fontFamily: ff('mono'), fontSize: isCompact ? 13 : 15, color: C.ink2, lineHeight: 1.7 }}>
-              {line}
+            <div style={{ marginBottom: 32 }}>
+              <HeroEyebrow text="SRT pilots open for Q4 2026, limited capacity" />
             </div>
-          ))}
-        </div>
 
-        <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: isCompact ? 56 : 72 }}>
-          <CTAButton title="Request Free Demo" kind="ink" />
-          <CTAButton title="Talk to the team" kind="ghost" />
-        </div>
+            <div style={{ marginBottom: 28 }}>
+              <span style={{
+                fontFamily: ff('geist'),
+                fontSize: isCompact ? 46 : 70,
+                fontWeight: 500,
+                letterSpacing: isCompact ? '-1.6px' : '-3px',
+                lineHeight: 1.05,
+                color: C.ink,
+              }}>
+                Bank & Credit Union<br />Capital Relief,{' '}
+              </span>
+              <span style={{
+                fontFamily: ff('geist'),
+                fontSize: isCompact ? 46 : 70,
+                fontWeight: 400,
+                letterSpacing: isCompact ? '-1.6px' : '-3px',
+                lineHeight: 1.05,
+                color: C.mute,
+              }}>
+                On Demand.
+              </span>
+            </div>
 
-        {/* HeroDiagram intentionally commented out in Swift source — omitted */}
-      </Centered>
+            <div style={{ marginBottom: 36 }}>
+              {[
+                '// A turnkey Significant Risk Transfer execution platform.',
+                '// Unlock CET1, keep the loans, grow the book, without',
+                '// building an internal CRT desk.',
+              ].map((line, i) => (
+                <div key={i} style={{ fontFamily: ff('mono'), fontSize: isCompact ? 13 : 15, color: C.ink2, lineHeight: 1.7 }}>
+                  {line}
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <CTAButton title="Request Free Demo" kind="ink" />
+              <CTAButton title="Talk to the team" kind="ghost" />
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

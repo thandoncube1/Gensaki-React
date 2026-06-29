@@ -13,6 +13,9 @@ import WebLandingPage from './pages/WebLandingPage';
 import AuthView from './pages/AuthViews';
 import GISTIndexView from './pages/GISTIndex';
 import DiligenceView from './pages/Diligence';
+import RegWatchView from './pages/RegWatch';
+import FitScoreView from './pages/FitScore';
+import DemoPage from './pages/DemoPage';
 
 // ─── Route → selectedItem mapping (for nav-link highlighting) ─────────────────
 const ROUTE_ITEM: Record<string, string> = {
@@ -40,6 +43,7 @@ function AppRoutes() {
     else if (item === 'RegWatch')                         navigate('/regwatch');
     else if (item === 'AuthViews')                        navigate('/signin');
     else if (item === 'SignUp')                           navigate('/signup');
+    else if (item === 'Demo')                             navigate('/demo');
   }
 
   return (
@@ -58,8 +62,16 @@ function AppRoutes() {
         element={<GISTIndexView onSelectItem={onSelectItem} />}
       />
       <Route
+        path="/fitscore"
+        element={<FitScoreView onSelectItem={onSelectItem} />}
+      />
+      <Route
         path="/diligence"
         element={<DiligenceView onSelectItem={onSelectItem} />}
+      />
+      <Route
+        path="/regwatch"
+        element={<RegWatchView onSelectItem={onSelectItem} />}
       />
       <Route
         path="/signin"
@@ -68,6 +80,10 @@ function AppRoutes() {
       <Route
         path="/signup"
         element={<AuthView initialMode="signUp" onSelectItem={onSelectItem} />}
+      />
+      <Route
+        path="/demo"
+        element={<DemoPage onSelectItem={onSelectItem} />}
       />
     </Routes>
   );

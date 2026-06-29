@@ -203,13 +203,13 @@ export function GensakiNav({
                   />
                 ))}
                 <NavLink title="Sign in" onClick={() => onSelectItem?.('AuthViews')} />
-                <CTAButton title="Request Free Demo" kind="cyan" onClick={() => onSelectItem?.('SignUp')} />
+                <CTAButton title="Request Free Demo" kind="cyan" onClick={() => onSelectItem?.('Demo')} />
               </div>
             </>
           ) : (
             <>
               <div style={{ flex: 1 }} />
-              <CTAButton title="Demo" kind="cyan" onClick={() => onSelectItem?.('SignUp')} />
+              <CTAButton title="Demo" kind="cyan" onClick={() => onSelectItem?.('Demo')} />
             </>
           )}
         </div>

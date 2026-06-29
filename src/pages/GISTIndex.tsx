@@ -392,7 +392,7 @@ function ScoreChip({ s }: { s: number }) {
   const c = scoreColor(s);
   return (
     <span style={{ display:'inline-flex', alignItems:'center', justifyContent:'center',
-      width:30, height:22, borderRadius:5, fontSize:12, fontWeight:700,
+      width:38, height:26, borderRadius:6, fontSize:13, fontWeight:700,
       fontFamily:ff('mono'), color:c, background:`${c}1F` }}>
       {s}
     </span>
@@ -400,16 +400,16 @@ function ScoreChip({ s }: { s: number }) {
 }
 
 function RankDelta({ d }: { d: number }) {
-  if (d > 0) return <span style={{ color:B.gr, fontFamily:ff('mono'), fontSize:11, fontWeight:600 }}>↑{d}</span>;
-  if (d < 0) return <span style={{ color:B.rd, fontFamily:ff('mono'), fontSize:11, fontWeight:600 }}>↓{Math.abs(d)}</span>;
-  return <span style={{ color:B.s, fontFamily:ff('mono'), fontSize:11 }}>−</span>;
+  if (d > 0) return <span style={{ color:B.gr, fontFamily:ff('mono'), fontSize:13, fontWeight:600 }}>↑{d}</span>;
+  if (d < 0) return <span style={{ color:B.rd, fontFamily:ff('mono'), fontSize:13, fontWeight:600 }}>↓{Math.abs(d)}</span>;
+  return <span style={{ color:B.s, fontFamily:ff('mono'), fontSize:13 }}>−</span>;
 }
 
 function Bdg({ label, color, icon }: { label: string; color: string; icon?: string }) {
   return (
-    <span style={{ display:'inline-flex', alignItems:'center', gap:4,
-      fontSize:10, fontWeight:700, color, background:`${color}1F`,
-      padding:'3px 8px', borderRadius:999, whiteSpace:'nowrap' }}>
+    <span style={{ display:'inline-flex', alignItems:'center', gap:5,
+      fontSize:12, fontWeight:600, color, background:`${color}1F`,
+      padding:'4px 10px', borderRadius:999, whiteSpace:'nowrap' }}>
       {icon && <span>{icon}</span>}{label}
     </span>
   );
@@ -421,28 +421,28 @@ function FlowWrap({ gap = 8, children }: { gap?: number; children: React.ReactNo
 
 function Sec({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
   return (
-    <div style={{ background:B.card, borderRadius:10, border:`1px solid ${B.bd}`, overflow:'hidden' }}>
-      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'16px 16px 12px' }}>
-        <span style={{ color:B.bl, fontSize:13, fontWeight:700 }}>{icon}</span>
-        <span style={{ fontSize:15, fontWeight:700, color:B.p }}>{title}</span>
+    <div style={{ background:B.card, borderRadius:12, border:`1px solid ${B.bd}`, overflow:'hidden' }}>
+      <div style={{ display:'flex', alignItems:'center', gap:10, padding:'18px 20px 14px' }}>
+        <span style={{ color:B.bl, fontSize:15, fontWeight:700 }}>{icon}</span>
+        <span style={{ fontSize:16, fontWeight:700, color:B.p, fontFamily:ff('geist') }}>{title}</span>
       </div>
-      <div style={{ padding:'0 16px 16px' }}>{children}</div>
+      <div style={{ padding:'0 20px 20px' }}>{children}</div>
     </div>
   );
 }
 
 function Eyebrow({ label }: { label: string }) {
-  return <div style={{ fontSize:11, fontWeight:700, letterSpacing:'0.9px', color:B.s, textTransform:'uppercase' }}>{label}</div>;
+  return <div style={{ fontSize:11, fontWeight:700, letterSpacing:'0.7px', color:B.s, textTransform:'uppercase', marginBottom:8 }}>{label}</div>;
 }
 
 function AiInsight({ title, text }: { title: string; text: string }) {
   return (
     <div style={{ background:`${B.pu}0F`, border:`1px solid ${B.pu}33`, borderRadius:10,
-      padding:14, display:'flex', gap:10, alignItems:'flex-start' }}>
-      <span style={{ fontSize:15, color:B.pu }}>◈</span>
+      padding:18, display:'flex', gap:12, alignItems:'flex-start' }}>
+      <span style={{ fontSize:18, color:B.pu, flexShrink:0, marginTop:1 }}>◈</span>
       <div>
-        <div style={{ fontSize:11, fontWeight:700, color:B.pu, marginBottom:4 }}>{title}</div>
-        <div style={{ fontSize:12, color:B.p, lineHeight:1.5 }}>{text}</div>
+        <div style={{ fontSize:12, fontWeight:700, color:B.pu, marginBottom:6, letterSpacing:'0.04em', textTransform:'uppercase' }}>{title}</div>
+        <div style={{ fontSize:14, color:B.p, lineHeight:1.65, fontFamily:ff('geist') }}>{text}</div>
       </div>
     </div>
   );
@@ -477,10 +477,11 @@ function PillPicker({ options, sel, onSel }: { options: string[]; sel: string; o
     <div style={{ display:'flex', gap:6, overflowX:'auto' }}>
       {options.map(o => (
         <button key={o} onClick={() => onSel(o)} style={{
-          fontSize:11, fontWeight:600, padding:'5px 11px', borderRadius:6, cursor:'pointer',
+          fontSize:13, fontWeight:600, padding:'7px 14px', borderRadius:7, cursor:'pointer',
           border:'none', background: sel === o ? B.p : 'transparent',
           color: sel === o ? '#fff' : B.s,
           outline: sel === o ? 'none' : `1px solid ${B.bd}`,
+          fontFamily: ff('geist'),
         }}>{o}</button>
       ))}
     </div>
@@ -489,15 +490,16 @@ function PillPicker({ options, sel, onSel }: { options: string[]; sel: string; o
 
 function FilterGroup({ label, opts, sel, onSel }: { label: string; opts: string[]; sel: string; onSel: (s: string) => void }) {
   return (
-    <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
-      <div style={{ fontSize:9, fontWeight:700, color:B.s, letterSpacing:'0.5px', textTransform:'uppercase' }}>{label}</div>
-      <div style={{ display:'flex', gap:5, flexWrap:'wrap' }}>
+    <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
+      <div style={{ fontSize:11, fontWeight:700, color:B.s, letterSpacing:'0.5px', textTransform:'uppercase', fontFamily:ff('geist') }}>{label}</div>
+      <div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>
         {opts.map(o => (
           <button key={o} onClick={() => onSel(o)} style={{
-            fontSize:10, fontWeight:600, padding:'4px 8px', borderRadius:5, cursor:'pointer',
+            fontSize:12, fontWeight:500, padding:'6px 12px', borderRadius:6, cursor:'pointer',
             border:'none', background: sel === o ? `${B.bl}1F` : 'transparent',
             color: sel === o ? B.bl : B.s,
             outline: sel === o ? 'none' : `1px solid ${B.bd}`,
+            fontFamily: ff('geist'),
           }}>{o}</button>
         ))}
       </div>
@@ -906,12 +908,13 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
     const active = lbSort === col;
     return (
       <button onClick={() => handleSort(col)} style={{
-        display:'flex', alignItems:'center', gap:4, width:w, minWidth:w, fontSize:10,
-        fontWeight:700, color: active ? B.bl : B.s, background:'none', border:'none',
-        cursor:'pointer', padding:0, textAlign:'left',
+        display:'flex', alignItems:'center', gap:4, width:w, minWidth:w, fontSize:12,
+        fontWeight:600, color: active ? B.bl : B.s, background:'none', border:'none',
+        cursor:'pointer', padding:0, textAlign:'left', fontFamily:ff('geist'),
+        letterSpacing:'0.01em',
       }}>
         {label}
-        <span style={{ fontSize:8, opacity: active ? 1 : 0.35 }}>{active ? (lbSortAsc?'↑':'↓') : '↕'}</span>
+        <span style={{ fontSize:9, opacity: active ? 1 : 0.4 }}>{active ? (lbSortAsc?'↑':'↓') : '↕'}</span>
       </button>
     );
   }
@@ -922,30 +925,33 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
     const arcData = ARC[arc];
     const srt = SRT[it.srtSignalRaw];
     return (
-      <div onClick={() => setSelected(it)} style={{ display:'flex', alignItems:'center', padding:'9px 0',
-        borderBottom:`1px solid ${B.bd}99`, cursor:'pointer' }}>
-        <span style={{ width:30, minWidth:30, fontSize:12, fontWeight:700, fontFamily:ff('mono'), color:B.s }}>{it.rank}</span>
-        <div style={{ width:220, minWidth:220, paddingRight:8 }}>
-          <div style={{ fontSize:13, fontWeight:600, color:B.p, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{it.name}</div>
-          <div style={{ display:'flex', gap:5, alignItems:'center', marginTop:1 }}>
-            <span style={{ fontSize:10, fontWeight:500, fontFamily:ff('mono'), color:B.s }}>{it.ticker??it.id}</span>
+      <div onClick={() => setSelected(it)} style={{ display:'flex', alignItems:'center', padding:'13px 0',
+        borderBottom:`1px solid ${B.bd}`, cursor:'pointer',
+        transition:'background 0.1s' }}
+        onMouseEnter={e => (e.currentTarget.style.background = `${B.bl}05`)}
+        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+        <span style={{ width:36, minWidth:36, fontSize:13, fontWeight:600, fontFamily:ff('mono'), color:B.s }}>{it.rank}</span>
+        <div style={{ width:240, minWidth:240, paddingRight:12 }}>
+          <div style={{ fontSize:14, fontWeight:600, color:B.p, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{it.name}</div>
+          <div style={{ display:'flex', gap:6, alignItems:'center', marginTop:3 }}>
+            <span style={{ fontSize:11, fontWeight:500, fontFamily:ff('mono'), color:B.s }}>{it.ticker??it.id}</span>
             <span style={{ color:B.bd }}>·</span>
-            <span style={{ fontSize:10, color:B.s }}>{it.charter === 'Credit Union' ? 'CU' : 'Bank'}</span>
-            <span style={{ fontSize:9, fontWeight:700, color:B.bl, background:`${B.bl}1A`, padding:'1px 4px', borderRadius:3 }}>{it.jurisdiction}</span>
+            <span style={{ fontSize:11, color:B.s }}>{it.charter === 'Credit Union' ? 'CU' : 'Bank'}</span>
+            <span style={{ fontSize:11, fontWeight:600, color:B.bl, background:`${B.bl}1A`, padding:'1px 6px', borderRadius:4 }}>{it.jurisdiction}</span>
           </div>
         </div>
-        <span style={{ width:150, minWidth:150, fontSize:11, color:B.s, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', paddingRight:8 }}>{it.peerGroup}</span>
-        <span style={{ width:70, minWidth:70, fontSize:11, fontWeight:500, fontFamily:ff('mono'), color:B.p }}>{fmtAssets(it.assets)}</span>
-        <span style={{ width:56, minWidth:56 }}><ScoreChip s={it.gist} /></span>
-        <span style={{ width:56, minWidth:56 }}><ScoreChip s={it.capital} /></span>
-        <span style={{ width:56, minWidth:56 }}><ScoreChip s={it.balance} /></span>
-        <span style={{ width:64, minWidth:64 }}><ScoreChip s={it.riskRoe} /></span>
-        <span style={{ width:62, minWidth:62 }}><RankDelta d={it.rankQoQ} /></span>
-        <span style={{ width:50, minWidth:50 }}><RankDelta d={it.rankYoY} /></span>
-        <span style={{ width:150, minWidth:150 }}>
-          {it.srtSignalRaw === 'none' ? <span style={{ fontSize:11, color:B.s }}>−</span> : <Bdg label={srt.label} color={srt.color} icon={srt.icon} />}
+        <span style={{ width:170, minWidth:170, fontSize:13, color:B.s, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', paddingRight:12 }}>{it.peerGroup}</span>
+        <span style={{ width:80, minWidth:80, fontSize:13, fontWeight:500, fontFamily:ff('mono'), color:B.p }}>{fmtAssets(it.assets)}</span>
+        <span style={{ width:60, minWidth:60 }}><ScoreChip s={it.gist} /></span>
+        <span style={{ width:60, minWidth:60 }}><ScoreChip s={it.capital} /></span>
+        <span style={{ width:60, minWidth:60 }}><ScoreChip s={it.balance} /></span>
+        <span style={{ width:68, minWidth:68 }}><ScoreChip s={it.riskRoe} /></span>
+        <span style={{ width:60, minWidth:60 }}><RankDelta d={it.rankQoQ} /></span>
+        <span style={{ width:56, minWidth:56 }}><RankDelta d={it.rankYoY} /></span>
+        <span style={{ width:162, minWidth:162 }}>
+          {it.srtSignalRaw === 'none' ? <span style={{ fontSize:13, color:B.s }}>−</span> : <Bdg label={srt.label} color={srt.color} icon={srt.icon} />}
         </span>
-        <span style={{ width:150, minWidth:150 }}><Bdg label={arcData.short} color={arcData.color} icon={arcData.icon} /></span>
+        <span style={{ width:162, minWidth:162 }}><Bdg label={arcData.short} color={arcData.color} icon={arcData.icon} /></span>
       </div>
     );
   }
@@ -1122,20 +1128,20 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
                     </div>
                     <div style={{ height:1, background:B.bd }} />
                     <div style={{ overflowX:'auto' }}>
-                      <div style={{ minWidth:1100 }}>
-                        <div style={{ display:'flex', alignItems:'center', padding:'8px 0', borderBottom:`1px solid ${B.bd}` }}>
-                          <Thd label="#" col="rank" w={30} />
-                          <Thd label="Institution" col="institution" w={220} />
-                          <Thd label="Peer group" col="peerGroup" w={150} />
-                          <Thd label="Assets" col="assets" w={70} />
-                          <Thd label="GIST" col="gist" w={56} />
-                          <Thd label="CAP" col="capital" w={56} />
-                          <Thd label="BAL" col="balance" w={56} />
-                          <Thd label="R-ROE" col="riskRoe" w={64} />
-                          <Thd label="QoQ" col="qoq" w={62} />
-                          <Thd label="YoY" col="yoy" w={50} />
-                          <Thd label="SRT Signal" col="signal" w={150} />
-                          <Thd label="Archetype" col="archetype" w={150} />
+                      <div style={{ minWidth:1234 }}>
+                        <div style={{ display:'flex', alignItems:'center', padding:'10px 0', borderBottom:`2px solid ${B.bd}` }}>
+                          <Thd label="#" col="rank" w={36} />
+                          <Thd label="Institution" col="institution" w={240} />
+                          <Thd label="Peer group" col="peerGroup" w={170} />
+                          <Thd label="Assets" col="assets" w={80} />
+                          <Thd label="GIST" col="gist" w={60} />
+                          <Thd label="CAP" col="capital" w={60} />
+                          <Thd label="BAL" col="balance" w={60} />
+                          <Thd label="R-ROE" col="riskRoe" w={68} />
+                          <Thd label="QoQ" col="qoq" w={60} />
+                          <Thd label="YoY" col="yoy" w={56} />
+                          <Thd label="SRT Signal" col="signal" w={162} />
+                          <Thd label="Archetype" col="archetype" w={162} />
                         </div>
                         {lbDisplayed.map(it => <LbRow key={it.id} it={it} />)}
                       </div>
@@ -1144,17 +1150,17 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
                 </Sec>
                 {/* Search overlay */}
                 <div style={{ position:'absolute', top:12, right:16 }}>
-                  <div style={{ display:'flex', alignItems:'center', gap:7, padding:'7px 10px',
-                    background:B.bg, border:`1px solid ${B.bd}`, borderRadius:7 }}>
-                    <span style={{ color:B.s, fontSize:11 }}>⌕</span>
+                  <div style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px',
+                    background:B.bg, border:`1px solid ${B.bd}`, borderRadius:8 }}>
+                    <span style={{ color:B.s, fontSize:13 }}>⌕</span>
                     <input value={lbSearch} onChange={e => setLbSearch(e.target.value)}
                       placeholder="Search institutions"
-                      style={{ border:'none', outline:'none', background:'none', fontSize:12, color:B.p, width:190 }} />
-                    {lbSearch && <button onClick={() => setLbSearch('')} style={{ background:'none', border:'none', cursor:'pointer', color:B.s, fontSize:12 }}>✕</button>}
+                      style={{ border:'none', outline:'none', background:'none', fontSize:13, color:B.p, width:200, fontFamily:ff('geist') }} />
+                    {lbSearch && <button onClick={() => setLbSearch('')} style={{ background:'none', border:'none', cursor:'pointer', color:B.s, fontSize:13 }}>✕</button>}
                   </div>
                 </div>
               </div>
-              <div style={{ fontSize:11, color:B.s }}>{lbDisplayed.length} institutions shown · click any row for the full institution read</div>
+              <div style={{ fontSize:13, color:B.s }}>{lbDisplayed.length} institutions shown · click any row for the full institution read</div>
             </div>
           )}
 
