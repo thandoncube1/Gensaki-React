@@ -465,7 +465,7 @@ function TabBar({ tabs, sel, onSel }: { tabs: { id: string; label: string; icon:
           </button>
         ))}
       </div>
-      <span style={{ fontSize:13, fontWeight:600, color:B.s, whiteSpace:'nowrap', paddingLeft:16 }}>
+      <span style={{ fontFamily: ff('geist'), fontSize:13, fontWeight:600, color:B.s, whiteSpace:'nowrap', paddingLeft:16 }}>
         1,247 institutions scored · Methodology v1.0 · Refreshed 12 Jun 2026
       </span>
     </div>
@@ -926,7 +926,7 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
     const srt = SRT[it.srtSignalRaw];
     return (
       <div onClick={() => setSelected(it)} style={{ display:'flex', alignItems:'center', padding:'13px 0',
-        borderBottom:`1px solid ${B.bd}`, cursor:'pointer',
+        borderBottom:`1px solid ${B.bd}`, cursor:'pointer', fontFamily:ff('geist'),
         transition:'background 0.1s' }}
         onMouseEnter={e => (e.currentTarget.style.background = `${B.bl}05`)}
         onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
