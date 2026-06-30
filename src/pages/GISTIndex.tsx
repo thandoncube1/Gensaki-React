@@ -1042,10 +1042,6 @@ export default function GISTIndexView({ onSelectItem }: GISTIndexProps) {
 
   const TABS = [
     { id:'leaderboard', label:'Leaderboard',     icon:'☰' },
-    { id:'peermap',     label:'Peer map',         icon:'⊹' },
-    { id:'movers',      label:'Movers',           icon:'↕' },
-    { id:'srt',         label:'SRT signal',       icon:'⚡' },
-    { id:'archetype',   label:'Archetypes',       icon:'⊞' },
     { id:'method',      label:'Method & sources', icon:'⌕' },
   ];
 

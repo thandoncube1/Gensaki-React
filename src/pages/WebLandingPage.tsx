@@ -12,24 +12,28 @@ import { PageFooter } from '../components/PageFooter';
 // Mirrors the fileprivate Swift tokens exactly.
 
 const C = {
-  bg:       '#FBFBF8',
-  ink:      '#0E1410',
-  ink2:     '#2A312D',
-  mute:     '#6B7368',
-  mute2:    '#9AA29A',
-  line:     '#E6E8E2',
-  card:     '#F4F5F0',
-  card2:    '#EDEFE9',
-  cyan:     '#74E0FF',
-  cyanInk:  '#0B1D27',
-  green:    '#2F9E69',
-  navy:     '#0B1320',
-  navyMute: '#9DA8B8',
-  mint1:    '#E7F6EC',
-  mint2:    '#F1FBF3',
+  bg:        '#FBFBF8',
+  ink:       '#0E1410',
+  ink2:      '#2A312D',
+  mute:      '#6B7368',
+  mute2:     '#9AA29A',
+  line:      '#E6E8E2',
+  line2:     '#EFF1EB',
+  card:      '#F4F5F0',
+  card2:     '#EDEFE9',
+  cyan:      '#74E0FF',
+  cyanInk:   '#0B1D27',
+  green:     '#2F9E69',
+  navy:      '#0B1320',
+  navyText:  '#E6EBF2',
+  navyMute:  '#9DA8B8',
+  mint1:     '#E7F6EC',
+  mint2:     '#F1FBF3',
   // Wong colorblind-safe dashboard accents
-  bl:       'rgb(0,114,178)',
-  am:       'rgb(230,159,0)',
+  bl:        'rgb(0,114,178)',
+  am:        'rgb(230,159,0)',
+  rd:        'rgb(213,94,0)',
+  pu:        'rgb(120,92,196)',
 } as const;
 
 // ─── Type helpers ─────────────────────────────────────────────────────────────
@@ -424,6 +428,7 @@ function TopWashSection({ isCompact }: { isCompact: boolean }) {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
+      paddingBottom: 40,
       background: [
         `linear-gradient(to bottom, #F2FBF4, ${C.bg} 55%)`,
         `radial-gradient(ellipse at 50% -20%, ${C.mint1}, ${C.mint2}, transparent 60%)`,
@@ -432,18 +437,18 @@ function TopWashSection({ isCompact }: { isCompact: boolean }) {
       {/* Reserve space below the fixed transparent nav */}
       <div style={{ height: 80, flexShrink: 0 }} />
 
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', padding: `0 ${hPad}px` }}>
-        <div style={{ maxWidth: 1180, width: '100%', margin: '0 auto' }}>
-          <div style={{ maxWidth: 720 }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: `0 ${hPad}px` }}>
+        <div style={{ maxWidth: 1180, width: '100%', margin: '0 auto', display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <div style={{ maxWidth: 720, display: 'flex', flexDirection: 'column', flex: 1 }}>
 
-            <div style={{ marginBottom: 32 }}>
+            <div style={{ paddingTop: isCompact ? 36 : 60, marginBottom: 32 }}>
               <HeroEyebrow text="SRT pilots open for Q4 2026, limited capacity" />
             </div>
 
             <div style={{ marginBottom: 28 }}>
               <span style={{
                 fontFamily: ff('geist'),
-                fontSize: isCompact ? 46 : 70,
+                fontSize: isCompact ? 46 : 88,
                 fontWeight: 500,
                 letterSpacing: isCompact ? '-1.6px' : '-3px',
                 lineHeight: 1.05,
@@ -453,7 +458,7 @@ function TopWashSection({ isCompact }: { isCompact: boolean }) {
               </span>
               <span style={{
                 fontFamily: ff('geist'),
-                fontSize: isCompact ? 46 : 70,
+                fontSize: isCompact ? 46 : 88,
                 fontWeight: 400,
                 letterSpacing: isCompact ? '-1.6px' : '-3px',
                 lineHeight: 1.05,
@@ -463,7 +468,7 @@ function TopWashSection({ isCompact }: { isCompact: boolean }) {
               </span>
             </div>
 
-            <div style={{ marginBottom: 36 }}>
+            <div style={{ marginBottom: 40 }}>
               {[
                 '// A turnkey Significant Risk Transfer execution platform.',
                 '// Unlock CET1, keep the loans, grow the book, without',
@@ -474,6 +479,9 @@ function TopWashSection({ isCompact }: { isCompact: boolean }) {
                 </div>
               ))}
             </div>
+
+            {/* Spacer — pushes CTAs to bottom of section */}
+            <div style={{ flex: 1 }} />
 
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               <CTAButton title="Request Free Demo" kind="ink" />
@@ -1119,7 +1127,7 @@ function BottomWashSection({ isCompact }: { isCompact: boolean }) {
       ].join(', '),
     }}>
       <Centered hPad={hPad}>
-        <div style={{ textAlign: 'center', paddingBottom: isCompact ? 48 : 72 }}>
+        <div style={{ textAlign: 'center', paddingBottom: isCompact ? 60 : 90 }}>
           <div style={{ fontFamily: ff('geist'), fontSize: isCompact ? 38 : 72, fontWeight: 500, letterSpacing: isCompact ? '-1.3px' : '-2.6px', lineHeight: 1, color: C.ink, marginBottom: 24 }}>
             Raise your capital efficiency,<br />without adding headcount.
           </div>
